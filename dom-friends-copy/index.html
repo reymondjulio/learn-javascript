@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM Friends</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="flex justify-center bg-teal-50">
+    <div class="container max-w-xl px-2 mx-auto">
+      <header class="my-4">
+        <h1 class="font-bold text-3xl text-center">DOM Friends</h1>
+      </header>
+
+      <main>
+        <div class="container max-w-sm py-2 mx-auto">
+          <div>
+            <img id="reymond-image" src="/dom-friends-copy/images/reymond.png" class="rounded object-center w-[400px] h-[400px]" alt="" />
+          </div>
+          <ul id="friends-1" class="flex flex-col bg-slate-200 p-6 mb-6 space-y-2">
+            <!-- display data here -->
+            <h3 class="text-center text-xl font-semibold">Reymond Julio</h3>
+            <p class="text-center text-lg text-slate-800">26 years old</p>
+            <p class="text-center text-lg text-slate-500">5 mutual friends</p>
+            <button id="button-1" class="bg-blue-500 text-white p-2 rounded w-full self-center hover:bg-blue-400">Confirm</button>
+            <button id="delete-1" class="bg-slate-300 rounded text-black font-semibold p-2 w-full self-center hover:bg-slate-400">Delete</button>
+          </ul>
+
+          <div>
+            <img id="haidar-image" src="/dom-friends-copy/images/haidar.jpeg" class="rounded w-full object-center" alt="" />
+          </div>
+          <ul id="friends-2" class="flex flex-col bg-slate-200 p-6 mb-6 space-y-2">
+            <h3 class="text-center text-xl font-semibold">Haidar Hanif</h3>
+            <p class="text-center text-lg text-slate-800">30 years old</p>
+            <p class="text-center text-lg text-slate-500">10 mutual friends</p>
+            <button id="button-2" class="bg-blue-500 text-white p-2 rounded w-full self-center hover:bg-blue-400">Confirm</button>
+            <button id="delete-2" class="bg-slate-300 rounded text-black font-semibold p-2 w-full self-center hover:bg-slate-400">Delete</button>
+          </ul>
+
+          <div>
+            <img id="caroline-image" src="/dom-friends-copy/images/caroline.jpg" class="rounded w-full object-center" alt="" />
+          </div>
+          <ul id="friends-3" class="flex flex-col bg-slate-200 p-6 mb-6 space-y-2">
+            <h3 class="text-center text-xl font-semibold">Caroline Siane</h3>
+            <p class="text-center text-lg text-slate-800">25 years old</p>
+            <p class="text-center text-lg text-slate-500">8 mutual friends</p>
+            <button id="button-3" class="bg-blue-500 text-white p-2 rounded w-full self-center hover:bg-blue-400">Confirm</button>
+            <button id="delete-3" class="bg-slate-300 rounded text-black font-semibold p-2 w-full self-center hover:bg-slate-400">Delete</button>
+          </ul>
+
+          <div>
+            <img id="vicky-image" src="/dom-friends-copy/images/vicky.jpg" class="rounded w-full object-center" alt="" />
+          </div>
+          <ul id="friends-4" class="flex flex-col bg-slate-200 p-6 mb-6 space-y-2">
+            <h3 class="text-center text-xl font-semibold">Vicky Campbell</h3>
+            <p class="text-center text-lg text-slate-800">26 years old</p>
+            <p class="text-center text-lg text-slate-500">7 mutual friends</p>
+            <button id="button-4" class="bg-blue-500 text-white p-2 rounded w-full self-center hover:bg-blue-400">Confirm</button>
+            <button id="delete-4" class="bg-slate-300 rounded text-black font-semibold p-2 w-full self-center hover:bg-slate-400">Delete</button>
+          </ul>
+
+          <div>
+            <img id="christopher-image" src="/dom-friends-copy/images/christopher.jpg" class="rounded w-full object-center" alt="" />
+          </div>
+          <ul id="friends-5" class="flex flex-col bg-slate-200 p-6 mb-6 space-y-2">
+            <h3 class="text-center text-xl font-semibold">Christopher Julio</h3>
+            <p class="text-center text-lg text-slate-800">31 years old</p>
+            <p class="text-center text-lg text-slate-500">15 mutual friends</p>
+            <button id="button-5" class="bg-blue-500 text-white p-2 rounded w-full self-center hover:bg-blue-400">Confirm</button>
+            <button id="delete-5" class="bg-slate-300 rounded text-black font-semibold p-2 w-full self-center hover:bg-slate-400">Delete</button>
+          </ul>
+        </div>
+      </main>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
