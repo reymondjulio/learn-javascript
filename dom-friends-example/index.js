@@ -5,7 +5,7 @@ let dataFriends = [
     name: "Reymond Julio",
     age: 26,
     mutualFriends: 5,
-    // isConfirmed: false
+    isConfirmed: true,
   },
   {
     id: 2,
@@ -13,7 +13,71 @@ let dataFriends = [
     name: "M Haidar Hanif",
     age: 30,
     mutualFriends: 6,
-    // isConfirmed: false
+    isConfirmed: false,
+  },
+  {
+    id: 3,
+    imageURL: "images/christopher.jpg",
+    name: "christopher",
+    age: 28,
+    mutualFriends: 3,
+    isConfirmed: true,
+  },
+  {
+    id: 4,
+    imageURL: "images/caroline.jpg",
+    name: "caroline",
+    age: 24,
+    mutualFriends: 8,
+    isConfirmed: true,
+  },
+  {
+    id: 5,
+    imageURL: "images/vicky.jpg",
+    name: "vicky",
+    age: 29,
+    mutualFriends: 2,
+    isConfirmed: false,
+  },
+  {
+    id: 6,
+    imageURL: "images/emily_brown.jpg",
+    name: "Emily Brown",
+    age: 31,
+    mutualFriends: 7,
+    isConfirmed: false,
+  },
+  {
+    id: 7,
+    imageURL: "images/daniel_wilson.jpg",
+    name: "Daniel Wilson",
+    age: 27,
+    mutualFriends: 4,
+    isConfirmed: true,
+  },
+  {
+    id: 8,
+    imageURL: "images/olivia_davis.jpg",
+    name: "Olivia Davis",
+    age: 33,
+    mutualFriends: 1,
+    isConfirmed: true,
+  },
+  {
+    id: 9,
+    imageURL: "images/william_johnson.jpg",
+    name: "William Johnson",
+    age: 25,
+    mutualFriends: 9,
+    isConfirmed: false,
+  },
+  {
+    id: 10,
+    imageURL: "images/sophia_martinez.jpg",
+    name: "Sophia Martinez",
+    age: 32,
+    mutualFriends: 6,
+    isConfirmed: true,
   },
 ];
 
@@ -25,19 +89,9 @@ function renderFriends() {
   dataFriends.forEach((friend) => {
     const friendItemElement = document.createElement("li"); // LI
 
-    friendItemElement.innerHTML = `
-    <div>
-      <img
-        src=${friend.imageURL}
-        alt=${friend.name}
-        class="rounded object-cover w-60 h-60"
-      />
-    </div>
-    <div class="flex flex-col bg-slate-200 p-6 mb-6 space-y-2">
-      <h3 class="text-center text-xl font-semibold">${friend.name}</h3>
-      <p class="text-center text-lg text-slate-800">${friend.age} years old</p>
-      <p class="text-center text-lg text-slate-500">${friend.mutualFriends} mutual friends</p>
-      
+    const actionsElement =
+      friend.isConfirmed === false
+        ? `
       <form onSubmit="confirmFriend(event)">
         <input type="hidden" name="friendId" value="${friend.id}" />
         <button
@@ -57,6 +111,25 @@ function renderFriends() {
           Delete
         </button>
       </form>
+    `
+        : `<button disabled type="button" class="bg-green-900 text-white p-2 rounded w-full self-center hover:bg-green-800">
+            Request Accepted
+          </button>`;
+
+    friendItemElement.innerHTML = `
+    <div>
+      <img
+        src=${friend.imageURL}
+        alt=${friend.name}
+        class="rounded object-cover w-60 h-60"
+      />
+    </div>
+    <div class="flex flex-col bg-slate-200 p-6 mb-6 space-y-2">
+      <h3 class="text-center text-xl font-semibold">${friend.name}</h3>
+      <p class="text-center text-lg text-slate-800">${friend.age} years old</p>
+      <p class="text-center text-lg text-slate-500">${friend.mutualFriends} mutual friends</p>
+      
+      ${actionsElement}
     </div>
     `;
 
@@ -87,20 +160,14 @@ function confirmFriend(event) {
   const formData = new FormData(form);
   const friendId = Number(formData.get("friendId"));
 
-  const confirmButton = form.querySelector('button[type="submit"]');
-  const deleteButton = form.nextElementSibling.querySelector(
-    'button[type="submit"]'
-  );
+  dataFriends = dataFriends.map((friend) => {
+    if (friend.id === friendId) {
+      return { ...friend, isConfirmed: true };
+    }
+    return friend;
+  });
 
-  const acceptedButton = document.createElement("button");
-  acceptedButton.innerHTML = `
-    <button type="button" class="bg-green-500 text-white p-2 rounded w-full self-center hover:bg-green-400">
-      Request Accepted
-    </button>
-  `;
-
-  confirmButton.parentNode.replaceChild(acceptedButton, confirmButton);
-  deleteButton.parentNode.removeChild(deleteButton);
+  renderFriends();
 }
 
 renderFriends();
