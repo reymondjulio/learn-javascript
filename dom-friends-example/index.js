@@ -5,6 +5,7 @@ let dataFriends = [
     name: "Reymond Julio",
     age: 26,
     mutualFriends: 5,
+    // isConfirmed: false
   },
   {
     id: 2,
@@ -12,6 +13,7 @@ let dataFriends = [
     name: "M Haidar Hanif",
     age: 30,
     mutualFriends: 6,
+    // isConfirmed: false
   },
 ];
 
@@ -36,11 +38,13 @@ function renderFriends() {
       <p class="text-center text-lg text-slate-800">${friend.age} years old</p>
       <p class="text-center text-lg text-slate-500">${friend.mutualFriends} mutual friends</p>
       
-      <form onSubmit="">
+      <form onSubmit="confirmFriend(event)">
+        <input type="hidden" name="friendId" value="${friend.id}" />
         <button
+        type="submit"
         class="bg-blue-500 text-white p-2 rounded w-full self-center hover:bg-blue-400"
         >
-        Confirm
+         Confirm
         </button>
       </form>
       
@@ -74,6 +78,29 @@ function deleteFriend(event) {
   });
 
   renderFriends();
+}
+
+function confirmFriend(event) {
+  event.preventDefault();
+
+  const form = event.target;
+  const formData = new FormData(form);
+  const friendId = Number(formData.get("friendId"));
+
+  const confirmButton = form.querySelector('button[type="submit"]');
+  const deleteButton = form.nextElementSibling.querySelector(
+    'button[type="submit"]'
+  );
+
+  const acceptedButton = document.createElement("button");
+  acceptedButton.innerHTML = `
+    <button type="button" class="bg-green-500 text-white p-2 rounded w-full self-center hover:bg-green-400">
+      Request Accepted
+    </button>
+  `;
+
+  confirmButton.parentNode.replaceChild(acceptedButton, confirmButton);
+  deleteButton.parentNode.removeChild(deleteButton);
 }
 
 renderFriends();
