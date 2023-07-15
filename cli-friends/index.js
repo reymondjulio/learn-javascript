@@ -1,38 +1,17 @@
 // Friend List
 let dataFriends = [
-  {
-    id: 1,
-    name: "Reymond",
-  },
-  {
-    id: 2,
-    name: "Haidar",
-  },
-  {
-    id: 3,
-    name: "Caroline",
-  },
-  {
-    id: 4,
-    name: "Emily",
-  },
-  {
-    id: 5,
-    name: "Christopher",
-  },
-  {
-    id: 6,
-    name: "Dave",
-  },
-  {
-    id: 7,
-    name: "Daniel",
-  },
-  {
-    id: 8,
-    name: "Olivia",
-  },
+  { id: 1, name: "Reymond", isConfirmed: false }, // friend object
+  { id: 2, name: "Haidar", isConfirmed: false },
+  { id: 3, name: "Caroline", isConfirmed: false },
+  { id: 4, name: "Emily", isConfirmed: false },
+  { id: 5, name: "Christopher", isConfirmed: false },
+  { id: 6, name: "Reynaldo", isConfirmed: false },
+  { id: 7, name: "Daniel", isConfirmed: false },
+  { id: 8, name: "Olivia", isConfirmed: false },
+  { id: 9, name: "Darmadi", isConfirmed: false },
 ];
+
+// -----------------------------------------------------------------------------
 
 // Display all friends list
 function renderFriends() {
@@ -40,83 +19,64 @@ function renderFriends() {
     console.log(friend);
   });
 }
-console.log("Render Friends");
 
-renderFriends();
-
-// Searching for friends with id number 1 and 3 (Reymond and Caroline)
-function searchFriend(id) {
-  let newSearchFriend = dataFriends.find((friend) => friend.id === id);
-
-  console.log(newSearchFriend);
+function renderConfirmedFriends() {
+  dataFriends.forEach((friend) => {
+    if (friend.isConfirmed) {
+      console.log(friend);
+    }
+  });
 }
 
-console.log("---------------------------------");
+// Searching for friends
+function searchFriends(keyword) {
+  const results = dataFriends.filter((friend) => {
+    const friendName = friend.name.toLowerCase();
+    return friendName.includes(keyword.toLowerCase());
+  });
 
-console.log("Search Friends");
-
-searchFriend(1);
-
-searchFriend(3);
+  return results;
+}
 
 // Deleting friends with id number 2,5,6,8 (Haidar, Christopher, Dave, Olivia)
 function deleteFriends(ids) {
-  let newDataFriends = [...dataFriends];
-
-  newDataFriends = newDataFriends.filter((friend) => !ids.includes(friend.id));
-
-  return newDataFriends;
+  dataFriends = dataFriends.filter((friend) => !ids.includes(friend.id));
 }
-
-const idsToDelete = [2, 5, 6, 8];
-const updatedDeleteFriends = deleteFriends(idsToDelete);
-
-console.log("---------------------------------");
-
-console.log("Delete Friends");
-
-console.log(updatedDeleteFriends);
 
 // Add friends with id number 9 and 10 (Sarah and Michael)
+function addFriends(namesToAdd) {
+  namesToAdd.forEach((nameToAdd) => {
+    const lastId = dataFriends[dataFriends.length - 1].id;
 
-function addFriends(friend1, friend2) {
-  const newFriend1 = {
-    id: dataFriends.length + 1,
-    name: friend1,
-  };
+    const newFriend = {
+      id: lastId + 1,
+      name: nameToAdd,
+      isConfirmed: false,
+    };
 
-  const newFriend2 = {
-    id: dataFriends.length + 2,
-    name: friend2,
-  };
-
-  const updatedFriends = [...dataFriends, newFriend1, newFriend2];
-  return updatedFriends;
+    dataFriends = [...dataFriends, newFriend];
+  });
 }
-const updatedDataFriends = addFriends("Sarah", "Michael");
-
-console.log("---------------------------------");
-
-console.log("Add Friends");
-
-console.log(updatedDataFriends);
 
 // To check whether the inputted id is in the friends list.
-
 function confirmFriend(id) {
-  const friend = updatedDataFriends.find((friend) => friend.id === id);
+  // if (typeof id !== "number") {
+  //   return null
+  // }
 
-  if (friend) {
-    console.log(`You have confirmed friendship with ${friend.name}`);
-  } else {
-    console.log(`There are no friends with that ID.`);
-  }
+  dataFriends = dataFriends.map((friend) => {
+    if (friend.id === id) {
+      return { ...friend, isConfirmed: true };
+    }
+    return friend;
+  });
 }
-console.log("---------------------------------");
 
-console.log("Confirm Friends");
-
-confirmFriend(3);
-confirmFriend(11);
-
-console.log("---------------------------------");
+module.exports = {
+  renderFriends,
+  renderConfirmedFriends,
+  searchFriends,
+  deleteFriends,
+  addFriends,
+  confirmFriend,
+};
